@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<title>Github Profile Search (using AngularJS & Git API)</title>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,100,700,900' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.8/angular-resource.min.js"></script>
+
+	<script src="js/controllers/search.controller.js"></script>
+	<script src="js/services/search.service.js"></script>
+</head>
+
+<body ng-controller="searchController">
+	<header>
+		<nav class="cf">
+			<div class="nav-title"><a ng-href="#">Github Profile Search</a></div>
+		</nav>
+	</header>
+
+	<div class="page">
+		<main class="cf">
+			<section class="card">
+				<div class="textintro">
+					<h2>Enter a Github username to start searching</h2>
+				</div>
+				<input type="text" id="username" ng-model="username" placeholder="Github username" ng-change="getInfo()" ng-model-options="{debounce: 1500}"/>
+				
+				<div ng-show="userNotFound">
+					<h2>Username Not Found</h2>
+				</div>
+
+				<div ng-show="userFound">
+					<h2> {{user.name}} </h2>
+					<p>URL <a href="{{user.html_url}}" target="_blank"> {{user.html_url}} </a></p>
+					<p>Login <a href="{{user.html_url}}" target="_blank">@{{user.login}} </a></p>
+				</div>
+			</section>
+		</main>
+	</div>
+
+</body>
+</html>
